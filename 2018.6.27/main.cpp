@@ -1,36 +1,29 @@
-//
-//  main.cpp
-//  2018.6.27
-//
-//  Created by 黄宏 on 2018/6/27.
-//  Copyright © 2018年 黄宏. All rights reserved.
-//
-
-
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
 #include <stdio.h>
-    int main()
+#include <stdio.h>
+int main()
+{
+    
+    FILE*fp;
+    int a[100][10];
+    int line = 0;
+    int c, i;
+ fp = fopen("in.csv", "r");
+    if(fp == NULL) return -1;
+    while(1)
     {
-        float score[10];
-        int i = 0;
-        float max = 0.0, min = 100.0, sum = 0.0;
-        printf("输入10个评分:");
-        for (; i < 10; ++i)
+        i=0;
+        while(1)
         {
-            scanf("%f", &score[i]); //存入数组
-            if (max < score[i])
-            {
-                max = score[i]; //最大
-            }
-            if (min > score[i])
-            {
-                min = score[i]; //最小
-            }
+            fscanf(fp, "%d", &a[line][i]);
+            c = getchar();
+            if(c == '\n'||c == EOF)break;
+            i++;
         }
-        for (i = 0; i < 10; ++i)
-        {
-            if (score[i] == max || score[i] == min)
-                continue;
-            sum += score[i];
-        }
-        printf("最后分数为:%f\n", sum/8.0);
+        line ++;
+        if(c == EOF) break;
     }
+     fclose(fp);
+}
